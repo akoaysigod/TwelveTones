@@ -1,6 +1,6 @@
 A python program to randomly generate music based on the Twelve-tone technique. This uses the [Pyknon music library](https://github.com/kroger/pyknon). Since it's small I added it here for convenience and in case I make any changes to it. 
 
-As of now it only generates ~4 measures of music. Since atonal music sounds really random anyway I figured this would be a good exercise in trying to write a program that randomly composes music. 
+As of now it only generates ~4 measures of music for up to four instruments. Since atonal music sounds really random anyway I figured this would be a good exercise in trying to write a program that randomly composes music. 
 
 Depending on your MIDI synthesis capabilities this will likely sound bad to really bad. 
 

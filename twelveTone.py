@@ -21,8 +21,9 @@ class RandomMusic:
     def keepSum(self):
         return
 
-    def genNotes(self, octave="''"):
-        scale = self.getRow()
+    def genNotes(self, octave="''", scale = None):
+        if scale is None:
+            scale = self.getRow()
         self.currentScale = list(scale)
         totalSum = 0
 
@@ -45,7 +46,7 @@ class RandomMusic:
             melody.append(note)
 
             totalSum += 1.0 / noteDur
-            if rest != None:
+            if rest is not None:
                 melody.append(rest)
                 totalSum += 1.0 / restDur
 
@@ -66,8 +67,9 @@ class RandomMusic:
 
         return NoteSeq(melody)
 
-    def genRandRange(self, range):
-        scale = self.getRow()
+    def genRandRange(self, range, scale = None):
+        if scale is None:
+            scale = self.getRow()
         self.currentScale = list(scale)
         totalSum = 0
 
@@ -94,7 +96,7 @@ class RandomMusic:
             melody.append(note)
 
             totalSum += 1.0 / noteDur
-            if rest != None:
+            if rest is not None:
                 melody.append(rest)
                 totalSum += 1.0 / restDur
 
@@ -115,33 +117,6 @@ class RandomMusic:
 
         return NoteSeq(melody)
 
-    def mid(self):
-        scale = self.getRow()
-
-        length = [4, 8, 16]
-        melody = []
-
-        for i in scale:
-            timing = length[randint(0, 2)]
-            noteStr = i + str(timing)
-            note = Note(noteStr)
-            melody.append(note)
-        return NoteSeq(melody)
-
-    def low(self):
-        scale = self.getRow()
-
-        length = [4, 8, 16]
-        melody = []
-
-        for i in scale:
-            timing = length[randint(0, 2)]
-            noteStr = i + str(timing) + ",,"
-            note = Note(noteStr)
-            melody.append(note)
-        return NoteSeq(melody)
-
-
 
 #generate the twelve tone matrix
 matGen = GenerateMatrix()
@@ -149,10 +124,16 @@ matrix = matGen.genMatrix()
 
 #generate the music randomly
 music = RandomMusic(matrix)
-seqHigh = music.genNotes()
+
+highScale = matrix[3]
+seqHigh = music.genNotes("''", highScale)
 seqMidHigh = music.genRandRange(["'", "''"])
-seqMid = music.mid()
-seqBass = music.low()
+
+midScale = matrix[7]
+seqMid = music.genNotes(",", midScale)
+
+lowScale = matrix[4]
+seqBass = music.genNotes(",,", lowScale)
 
 #generate midi file
 midi = Midi(4, 90)
@@ -160,5 +141,7 @@ midi.seq_notes(seqHigh, 0)
 midi.seq_notes(seqMidHigh, 1)
 midi.seq_notes(seqMid, 2)
 midi.seq_notes(seqBass, 3)
-midi.write('song.mid')
+
+#you'll probably have to change this!
+midi.write('/Users/tony/Desktop/song.mid')
 

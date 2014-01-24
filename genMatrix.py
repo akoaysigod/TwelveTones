@@ -10,6 +10,12 @@ class GenerateMatrix:
 
         self.__genPrimeSeries()
         self.__genNumberSeries()
+    
+        self.currentMatrix = []
+    
+    def printMatrix(self):
+        for row in self.currentMatrix:
+            print row
 
     #generate the prime series to which the rest of the rows will be based on
     def __genPrimeSeries(self):
@@ -51,7 +57,8 @@ class GenerateMatrix:
                 classNumber = (rootInterval + self.intervalScale[k]) % 12
                 noteIndex = self.intervalScale.index(classNumber)
                 tmp.append(self.primeSeries[noteIndex])
-                ret.append(tmp)
+            ret.append(tmp)
+        self.currentMatrix = ret
         return ret
 
     #if for whatever reason you need to generate a new matrix use this method

@@ -17,4 +17,4 @@ Allow control over scales to be used.<br>
 Add dynamic variations<br>
 Create example song, I plan on recreating the MIDI in a proper DAW so the above suggestion I might not ever implement<br>
 Write music library, someday... 
- 
+
